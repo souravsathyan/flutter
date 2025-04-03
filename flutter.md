@@ -57,3 +57,11 @@ super.key
 - super.key is used to forward the key parameter (which is an object used to identify a widget) from a subclass constructor to its superclass constructor
 - Keys are crucial for Flutter's state management; they ensure that the framework can identify and re-use existing widgets correctly during rebuilds, preventing unnecessary re-initialization and ensuring data persistence.
 -
+
+State<DiceRoller>:
+
+This means that \_DiceRoller is the state class for the DiceRoller widget.
+
+The State<T> class is generic, and T represents the StatefulWidget it belongs to (DiceRoller in this case).
+
+what happens when we roll dice button is pressed

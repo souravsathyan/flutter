@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/home_screen.dart';
 import 'package:quiz_app/question_screen.dart';
-
+import 'package:quiz_app/data/dummy.dart';
+import 'package:quiz_app/results_screen.dart';
 /**
  * class _QuizState extends State<Quiz>
  * this is says that the class _QuizState is connected to the class Quiz
@@ -32,6 +33,7 @@ class _QuizState extends State<Quiz> {
   //   activeScreen = Homescreen(switchScreen);
   // }
 
+  List<String> selectedAnswers = [];
   var activeScreen = 'home-screen';
 
   void switchScreen() {
@@ -40,21 +42,40 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void chooseAnswer(String answer) {
+    selectedAnswers.add(answer);
+    if (selectedAnswers.length == questions.length) {
+      setState(() {
+        activeScreen = 'result-screen';
+      });
+    }
+  }
+
+  void restartQuiz() {
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = 'home-screen';
+    });
+  }
+
   @override
   Widget build(context) {
     Widget screenWidget = Homescreen(switchScreen);
     if (activeScreen == 'question-screen') {
-      screenWidget = const QuestionScreen();
+      screenWidget = QuestionScreen(onSelectAnswer: chooseAnswer);
+    }
+    if (activeScreen == 'result-screen') {
+      screenWidget = ResultsScreen(
+        chosenAnswers: selectedAnswers,
+        restartQuiz: restartQuiz,
+      );
     }
     return MaterialApp(
       home: Scaffold(
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                Colors.lightBlueAccent,
-                const Color.fromARGB(255, 28, 3, 71),
-              ],
+              colors: [Colors.white30, Colors.blueGrey],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),

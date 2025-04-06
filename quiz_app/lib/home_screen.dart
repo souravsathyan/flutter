@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Homescreen extends StatelessWidget {
   const Homescreen(this.toQuiz, {super.key});
@@ -17,9 +18,13 @@ class Homescreen extends StatelessWidget {
             color: const Color.fromARGB(150, 255, 255, 255),
           ),
           const SizedBox(height: 20),
-          const Text(
+          Text(
             'Learn flutter the fun way!',
-            style: TextStyle(fontSize: 24, color: Colors.white),
+            style: GoogleFonts.rubik(
+              color: Colors.black87,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 20),
           ElevatedButton.icon(

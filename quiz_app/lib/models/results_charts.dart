@@ -66,7 +66,7 @@ class ResultsChartsState extends State<ResultsCharts> {
                     titleStyle: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   );
                 }).toList(),

@@ -15,13 +15,13 @@ class Homescreen extends StatelessWidget {
           Image.asset(
             'assets/images/quiz-logo.png',
             width: 200,
-            color: const Color.fromARGB(150, 255, 255, 255),
+            color: const Color.fromARGB(255, 255, 255, 255),
           ),
           const SizedBox(height: 20),
           Text(
             'Learn flutter the fun way!',
             style: GoogleFonts.rubik(
-              color: Colors.black87,
+              color: Colors.white,
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),

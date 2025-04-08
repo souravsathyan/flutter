@@ -48,14 +48,18 @@ class ResultsScreen extends StatelessWidget {
             Text(
               'Congratulations!',
               style: GoogleFonts.lato(
-                color: Colors.black87,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 34,
               ),
             ),
             Text(
               'You answered $numOfCorrectAnswers out of  $numOfTotalQuestions questions',
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
             ResultsCharts(summaryData: summary),
             const SizedBox(height: 30),

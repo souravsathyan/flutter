@@ -1,4 +1,5 @@
 import 'package:exp_tracker/widgets/expense_list/expense_list.dart';
+import 'package:exp_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 import 'package:exp_tracker/Modals/expense.dart';
 
@@ -45,9 +46,29 @@ class _ExpensesState extends State<Expenses> {
     ),
   ];
 
+  void _openModalSheet() {
+    showModalBottomSheet(
+      // this context is the context of the Expenses widget.
+      // The location in the tree where this widget builds.
+      // this context contains meta data about the current widget.
+      // used to locate where in the widget tree the bottom sheet should be displayed.
+      context: context,
+      // this ctx is for the modal sheet.
+      builder: (ctx) => NewExpense(),
+    );
+  }
+
   @override
   Widget build(context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Expense Tracker'),
+        backgroundColor: const Color(0xFF3B82F6),
+        foregroundColor: Colors.white,
+        actions: [
+          IconButton(onPressed: _openModalSheet, icon: Icon(Icons.add)),
+        ],
+      ),
       body: Column(
         children: [
           const Text('chart'),

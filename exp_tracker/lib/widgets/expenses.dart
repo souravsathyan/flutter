@@ -1,3 +1,4 @@
+import 'package:exp_tracker/widgets/chart/chart.dart';
 import 'package:exp_tracker/widgets/expense_list/expense_list.dart';
 import 'package:exp_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +76,7 @@ class _ExpensesState extends State<Expenses> {
         ],
       ),
       body: Column(
-        children: [const Text('chart'), Expanded(child: mainContent)],
+        children: [Chart(expenses: _dummyData), Expanded(child: mainContent)],
       ),
     );
   }

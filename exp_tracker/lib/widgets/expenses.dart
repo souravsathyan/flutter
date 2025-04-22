@@ -13,67 +13,69 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
-  final List<Expense> _dummyData = [
-    Expense(
-      title: 'Nike Shoes',
-      amount: 3499.99,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
-    Expense(
-      title: 'Groceries',
-      amount: 1500.00,
-      date: DateTime.now(),
-      category: Category.food,
-    ),
-    Expense(
-      title: 'Train Ticket',
-      amount: 500.00,
-      date: DateTime.now(),
-      category: Category.travel,
-    ),
-    Expense(
-      title: 'Office Supplies',
-      amount: 2000.00,
-      date: DateTime.now(),
-      category: Category.work,
-    ),
-    Expense(
-      title: 'Miscellaneous',
-      amount: 1000.00,
-      date: DateTime.now(),
-      category: Category.other,
-    ),
-  ];
+  final List<Expense> _dummyData = [];
 
   void _openModalSheet() {
     showModalBottomSheet(
+      isScrollControlled: true,
       // this context is the context of the Expenses widget.
       // The location in the tree where this widget builds.
       // this context contains meta data about the current widget.
       // used to locate where in the widget tree the bottom sheet should be displayed.
       context: context,
       // this ctx is for the modal sheet.
-      builder: (ctx) => NewExpense(),
+      builder: (ctx) => NewExpense(onSubmit: _addExpense),
+    );
+  }
+
+  void _addExpense(Expense expense) {
+    setState(() {
+      _dummyData.add(expense);
+    });
+  }
+
+  void removeExpense(Expense expense) {
+    final expenseIndex = _dummyData.indexOf(expense);
+    setState(() {
+      _dummyData.remove(expense);
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 3),
+        content: const Text('Expense Deleted'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            setState(() {
+              _dummyData.insert(expenseIndex, expense);
+            });
+          },
+        ),
+      ),
     );
   }
 
   @override
   Widget build(context) {
+    Widget mainContent = Center(
+      child: Text('No data available. Please add some'),
+    );
+
+    if (_dummyData.isNotEmpty) {
+      mainContent = ExpenseList(
+        expenses: _dummyData,
+        removeExpense: removeExpense,
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Expense Tracker'),
-        backgroundColor: const Color(0xFF3B82F6),
-        foregroundColor: Colors.white,
         actions: [
           IconButton(onPressed: _openModalSheet, icon: Icon(Icons.add)),
         ],
       ),
       body: Column(
-        children: [
-          const Text('chart'),
-          Expanded(child: ExpenseList(expenses: _dummyData)),
-        ],
+        children: [const Text('chart'), Expanded(child: mainContent)],
       ),
     );
   }
